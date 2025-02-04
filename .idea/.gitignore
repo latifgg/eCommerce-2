@@ -2,8 +2,45 @@
 /shelf/
 /workspace.xml
 node_modules/
-.DS_Store
-*.log
-build/
 dist/
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# IntelliJ IDEA / VS Code / Eclipse / NetBeans gibi IDE dosyaları
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+*.swp
+
+# Çalışma sırasında oluşan log ve cache dosyaları
+*.log
+*.tmp
+*.lock
+*.cache
+
+# OS (İşletim Sistemi) dosyaları
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Gradle Wrapper dosyaları (sadece belirli dosyalar hariç)
+**/gradle/wrapper/gradle-wrapper.jar
+**/gradle/wrapper/gradle-wrapper.properties
+
+# Test çıktıları
+test-output/
+out/
+bin/
+target/
 
