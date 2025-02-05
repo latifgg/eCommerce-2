@@ -13,6 +13,12 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private UserServiceClient userServiceClient;
+
+    @Autowired
+    private ProductServiceClient productServiceClient;
+
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
@@ -22,6 +28,14 @@ public class OrderService {
     }
 
     public Order createOrder(Order order) {
+        // Kullanıcı ve Ürün kontrolü
+        if (!userServiceClient.isUserExists(order.getUserId())) {
+            throw new RuntimeException("Kullanıcı bulunamadı!");
+        }
+        if (!productServiceClient.isProductExists(order.getProductId())) {
+            throw new RuntimeException("Ürün bulunamadı!");
+        }
+
         return orderRepository.save(order);
     }
 
