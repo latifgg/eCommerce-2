@@ -12,7 +12,7 @@ public class UserServiceClient {
     private WebClient.Builder webClientBuilder;
 
     public boolean isUserExists(Long userId) {
-        String userServiceUrl = "http://localhost:8083/users/" + userId;
+        String userServiceUrl = "http://user-service:8083/users/" + userId;
 
         User user = webClientBuilder.build()
                 .get()
