@@ -19,8 +19,36 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Grant execute permission for gradlew in all services
+        run: |
+          chmod +x userservice/gradlew
+          chmod +x productservice/gradlew
+          chmod +x orderservice/gradlew
+          chmod +x gatewayAPI/gradlew
+
+      - name: Build User Service
+        run: |
+          cd userservice
+          ./gradlew build
+          cd ..
+
+      - name: Build Product Service
+        run: |
+          cd productservice
+          ./gradlew build
+          cd ..
+
+      - name: Build Order Service
+        run: |
+          cd orderservice
+          ./gradlew build
+          cd ..
+
+      - name: Build API Gateway
+        run: |
+          cd gatewayAPI
+          ./gradlew build
+          cd ..
 
       - name: Build Docker images
         run: |
