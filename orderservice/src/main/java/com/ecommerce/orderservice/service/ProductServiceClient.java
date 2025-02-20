@@ -12,7 +12,7 @@ public class ProductServiceClient {
     private WebClient.Builder webClientBuilder;
 
     public boolean isProductExists(Long productId) {
-        String productServiceUrl = "http://product-service:8082/products/" + productId;
+        String productServiceUrl = "http://product-service-helmchart:8082/products/" + productId;
 
         Product product = webClientBuilder.build()
                 .get()

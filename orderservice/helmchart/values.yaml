@@ -1,0 +1,15 @@
+image:
+  repository: latifbey/order-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8081
+
+ingress:
+  enabled: false
+serviceAccount:
+  create: false
+autoscaling:
+  enabled: false

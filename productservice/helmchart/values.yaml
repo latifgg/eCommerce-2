@@ -1,0 +1,15 @@
+image:
+  repository: latifbey/product-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8082
+
+ingress:
+  enabled: false
+serviceAccount:
+  create: false
+autoscaling:
+  enabled: false
