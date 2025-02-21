@@ -75,7 +75,7 @@ jobs:
       - name: Configure Kubernetes
         run: |
           echo "${{ secrets.KUBE_TOKEN }}" | kubectl config set-credentials github-actions --token=$(cat -)
-          kubectl config set-cluster docker-desktop --server=https://kubernetes.default.svc
+          kubectl config set-cluster docker-desktop --server=https://kubernetes.docker.internal:6443 --insecure-skip-tls-verify=true
           kubectl config set-context default --cluster=docker-desktop --user=github-actions
           kubectl config use-context default
 
