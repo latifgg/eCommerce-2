@@ -72,18 +72,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Configure Kubernetes
-        run: |
-          echo "${{ secrets.KUBE_TOKEN }}" | kubectl config set-credentials github-actions --token=$(cat -)
-          kubectl config set-cluster docker-desktop --server=https://kubernetes.docker.internal:6443 --insecure-skip-tls-verify=true
-          kubectl config set-context default --cluster=docker-desktop --user=github-actions
-          kubectl config use-context default
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Create Kubernetes Cluster (Kind)
+        uses: helm/kind-action@v1.8.0
 
       - name: Deploy to Kubernetes
         run: |
           cd helmchart/ecommerce
-          helm upgrade --install ecommerce . 
-          kubectl rollout restart deployment/api-gateway-helmchart
-          kubectl rollout restart deployment/order-service-helmchart
-          kubectl rollout restart deployment/product-service-helmchart
-          kubectl rollout restart deployment/user-service-helmchart
+          helm upgrade --install ecommerce .
+
+          # Check deployment status
+          kubectl get pods
+          kubectl get svc
+          kubectl get ingress
