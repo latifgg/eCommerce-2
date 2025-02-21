@@ -1,0 +1,65 @@
+replicaCount: 1
+
+# Docker Hub'dan çekilecek imajlar için genel yapı
+image:
+  pullPolicy: IfNotPresent
+
+services:
+  api-gateway:
+    image: "latifbey/api-gateway:latest"
+    containerPort: 8080
+    servicePort: 8080
+  order-service:
+    image: "latifbey/order-service:latest"
+    containerPort: 8081
+    servicePort: 8081
+  product-service:
+    image: "latifbey/product-service:latest"
+    containerPort: 8082
+    servicePort: 8082
+  user-service:
+    image: "latifbey/user-service:latest"
+    containerPort: 8083
+    servicePort: 8083
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  hosts:
+    - host: localhost  # ecommerce.local yerine localhost kullan
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: api-gateway-helmchart
+              port:
+                number: 8080
+
+serviceAccount:
+  create: false
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
+# ✅ PostgreSQL Konfigürasyonu (Eksiksiz)
+postgresql:
+  enabled: true
+  image: "postgres:15"
+  username: "postgres"
+  password: "postgres"
+  database: "ecommerce"
+  service:
+    name: postgresql
+    port: 5432
+  persistence:
+    enabled: true
+    size: 1Gi
