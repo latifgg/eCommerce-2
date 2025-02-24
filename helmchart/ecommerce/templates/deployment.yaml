@@ -21,4 +21,11 @@ spec:
           image: "{{ $service.image }}"
           ports:
             - containerPort: {{ $service.containerPort }}
+          {{- if $service.env }}
+          env:
+            {{- range $key, $value := $service.env }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+          {{- end }}
   {{- end }}

@@ -53,6 +53,17 @@ services:
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
 
+  stock-service:
+    image: latifbey/stock-service:latest
+    build: ./stockservice
+    container_name: stock-service
+    ports:
+      - "8084:8084"
+    depends_on:
+      - postgresql
+    environment:
+      MONGO_DB_URI: mongodb://mongodb:27017/stockdb
+
   api-gateway:
     image: latifbey/api-gateway:latest  # ✅ Docker Hub için image eklendi
     build: ./gatewayAPI
@@ -63,6 +74,7 @@ services:
       - user-service
       - product-service
       - order-service
+      - stock-service
 
 volumes:
   postgres_data:
