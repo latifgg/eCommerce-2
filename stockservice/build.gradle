@@ -21,6 +21,7 @@ dependencies {
     implementation("org.mongodb:mongodb-driver-sync")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("org.mongodb:bson")
+    implementation("io.micronaut.kafka:micronaut-kafka")
     compileOnly("io.micronaut:micronaut-http-client")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("org.yaml:snakeyaml")

@@ -24,8 +24,8 @@ spec:
           {{- if $service.env }}
           env:
             {{- range $key, $value := $service.env }}
-            - name: {{ $key }}
-              value: "{{ $value }}"
+            - name: "{{ $key }}"
+              value: "{{ tpl $value $ }}"
             {{- end }}
           {{- end }}
   {{- end }}
