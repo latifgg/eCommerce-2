@@ -28,14 +28,20 @@ public class StockController {
     }
     @Get
     public List<StockItem> getAllStocks() {
-        return stockRepository.findAll();
+        List<StockItem> stocks = stockRepository.findAll();
+
+        LOG.info("Fetched stocks from DB: " + stocks); // ✅ MongoDB'den dönen verileri yazdır
+
+        return stocks;
     }
 
     @Get("/{id}")
     public Optional<StockItem> getStockById(@PathVariable String id) {
-        LOG.info("------------Received ID-------------: " + id);
-        return stockRepository.findById(id); // ✅ ObjectId yerine direkt String ID kullan
+        LOG.info("Received ID: " + id);
+
+        return stockRepository.findById(id);  // ✅ Direkt String ID olarak arıyoruz
     }
+
 
     @Post
     public HttpResponse<StockItem> addStock(@Body StockItem stockItem) {

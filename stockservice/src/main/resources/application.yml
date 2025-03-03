@@ -10,5 +10,7 @@ kafka:
   bootstrap.servers: "kafka:9092"
   security.protocol: SASL_PLAINTEXT
   sasl.mechanism: PLAIN
-  sasl.jaas.config: "org.apache.kafka.common.security.scram.ScramLoginModule required username='user1' password='4X1Hsu9bLO';"
+  sasl.jaas.config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='user1' password='aVPF9T3kcg';"
+
+
 

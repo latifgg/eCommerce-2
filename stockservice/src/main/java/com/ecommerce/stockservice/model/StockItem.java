@@ -12,7 +12,7 @@ public class StockItem {
 
     @Id
     @BsonProperty("_id")
-    private String id; // ✅ ObjectId yerine String olarak güncellendi
+    private String id;  // ✅ ObjectId yerine String yapıyoruz
 
     private String productId;
     private int quantity;
@@ -57,4 +57,5 @@ public class StockItem {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
 }
